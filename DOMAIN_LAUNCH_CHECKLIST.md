@@ -1,10 +1,10 @@
 # MemoryStudio.tv — domain cutover and SEO launch checklist
 
-**Prepared for Memory Studio, 2026-10-27.** The planned domain is `MemoryStudio.tv`. This repository currently has working SEO content with canonicals pointing to its GitHub Pages project URL `https://clearmyrecord.github.io/memory-studio-website/` until the custom domain is verified and serves HTTPS. **Do not prematurely point canonical tags to a domain that does not yet resolve.**
+**Updated October 28, 2026.** `MemoryStudio.tv` has been purchased through IONOS. The domain is not yet verified as connected to GitHub Pages. This repository currently has working SEO content with canonicals pointing to its GitHub Pages project URL `https://clearmyrecord.github.io/memory-studio-website/` until the custom domain is verified and serves HTTPS. **Do not prematurely point canonical tags to a domain that does not yet resolve.**
 
 ## DNS and GitHub Pages (owner action)
 
-1. Confirm you own and control the domain registration and DNS zone `memorystudio.tv`. Do not assume registration from brand intent alone.
+1. The owner reports purchase of `memorystudio.tv` at IONOS. Confirm that it appears under **IONOS → Domains & SSL** and you control its DNS zone.
 2. Verify the domain in the GitHub account or organization controlling `clearmyrecord`: follow GitHub's exact TXT ownership challenge. This prevents other accounts from claiming unverified domains. The TXT value is provided by GitHub and must not be invented.
 3. Open `https://github.com/clearmyrecord/memory-studio-website/settings/pages`, confirm the site publishes from the `main` branch root, and set **Custom domain** to `memorystudio.tv`. Save. GitHub Pages may write a `CNAME` file for you.
 4. At the **domain's DNS provider** configure the apex (@) **A** records for GitHub Pages:
