@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#071523">
+<title>Checkout Test Result | Memory Studio</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#071523;color:#f7f6f2;font:16px/1.65 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+a{color:#efc477}.wrap{max-width:740px;margin:0 auto;padding:30px 22px}.brand{display:inline-block;font-weight:850;color:#efc477;letter-spacing:.1em;text-decoration:none}
+.card{background:#0c2132;border:1px solid #34495b;border-radius:16px;padding:clamp(24px,5vw,48px);margin-top:70px}h1{font-size:clamp(2rem,4vw,3rem);line-height:1.16;margin:.5em 0}p{color:#c8d2d9}
+.label{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:#efc477;font-weight:750}.button{display:inline-flex;background:#efc477;color:#102033;border-radius:8px;text-decoration:none;font-weight:800;padding:12px 20px;margin-top:20px}
+a:focus-visible{outline:3px solid #efc477;outline-offset:4px}
+</style>
+</head>
+<body>
+<header class="wrap"><a class="brand" href="/">MEMORY STUDIO</a></header>
+<main class="wrap"><div class="card" role="status" aria-live="polite">
+<div class="label">Stripe sandbox testing</div>
+<h1 id="result-title">Checkout test result</h1>
+<p id="result-copy">This page is used for internal Stripe sandbox testing. The Memory Studio commercial checkout is not live and no public orders are being accepted.</p>
+<p><strong>Important:</strong> A browser redirect does not prove payment or license ownership. Only the server-verified Stripe webhook can issue a signed license, which is delivered separately when the delivery system is configured.</p>
+<a class="button" href="/">Return to Memory Studio</a>
+</div></main>
+<script>
+(function(){
+  var p=new URLSearchParams(window.location.search);
+  var title=document.getElementById('result-title');
+  var copy=document.getElementById('result-copy');
+  if(p.get('checkout')==='success'){
+    title.textContent='Sandbox checkout returned';
+    copy.textContent='The test checkout returned to Memory Studio. This does not confirm payment or activation. License issuance requires server-side Stripe verification and configured email delivery.';
+  }else if(p.get('checkout')==='cancel'){
+    title.textContent='Sandbox checkout canceled';
+    copy.textContent='The test checkout was canceled. No activation is granted by visiting this page.';
+  }
+  // Remove session identifiers from the visible address bar; this page does not need them.
+  if(window.location.search){window.history.replaceState(null,'',window.location.pathname);}
+})();
+</script>
+</body>
+</html>
