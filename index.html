@@ -87,10 +87,75 @@
 .partner-teaser .partner-points span:last-child{border-bottom:0;padding-bottom:0}
 .partner-teaser .partner-disclosure{font-size:.82rem;color:#adc1cd;margin:15px 0 0}
 @media(max-width:850px){.partner-teaser-layout{grid-template-columns:1fr}.partner-teaser{padding:55px 0}}
+
+/* Responsive primary navigation: keep the logo and trial CTA readable at every width. */
+.nav{z-index:50}
+.nav-inner{gap:24px}
+.brand{flex:0 0 auto}
+.brand strong,.brand span{white-space:nowrap}
+.navlinks{justify-content:flex-end;gap:clamp(12px,1.55vw,23px);min-width:0;flex-wrap:nowrap}
+.navlinks>a:not(.button){display:inline-flex;align-items:center;white-space:nowrap;font-size:.83rem;font-weight:650}
+.navlinks>.nav-cta{white-space:nowrap;flex:0 0 auto;min-height:44px;padding:11px 17px;font-size:.82rem}
+.nav-more{position:relative;flex:0 0 auto}
+.nav-more>summary{display:flex;align-items:center;gap:6px;padding:10px 0;list-style:none;cursor:pointer;color:#e2e6e9;font-weight:650;font-size:.83rem;white-space:nowrap}
+.nav-more>summary::-webkit-details-marker{display:none}
+.nav-more>summary:hover,.nav-more[open]>summary{color:var(--gold)}
+.nav-more>summary:focus-visible{outline:3px solid var(--gold);outline-offset:4px;border-radius:3px}
+.nav-more>summary span{color:var(--gold);font-size:.75rem}
+.nav-dropdown{position:absolute;top:calc(100% + 10px);right:0;width:235px;max-height:min(70vh,530px);overflow-y:auto;padding:9px;border:1px solid rgba(239,196,119,.28);border-radius:12px;background:#0c2132;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.nav-dropdown a{display:block!important;padding:10px 12px;border-radius:7px;color:#e2e6e9!important;font-size:.86rem!important;line-height:1.35;white-space:normal}
+.nav-dropdown a:hover,.nav-dropdown a:focus-visible{background:rgba(239,196,119,.12);color:var(--gold)!important}
+.nav-toggle{display:none;align-items:center;justify-content:center;gap:9px;min-height:43px;padding:8px 14px;border:1px solid rgba(239,196,119,.5);border-radius:8px;background:rgba(239,196,119,.06);color:var(--gold);font-weight:750;cursor:pointer}
+.nav-toggle-icon{font-size:1.2rem;line-height:1}
+@media(max-width:1080px){
+  .nav-inner{min-height:74px}
+  .nav-toggle{display:inline-flex;margin-left:auto;flex-shrink:0}
+  .navlinks{display:none;position:absolute;top:100%;left:0;right:0;z-index:10;max-height:calc(100vh - 74px);max-height:calc(100dvh - 74px);overflow-y:auto;overscroll-behavior:contain;flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:0;padding:12px max(20px,calc((100vw - 1180px)/2)) 20px;background:#081b29;border-bottom:1px solid rgba(239,196,119,.28);box-shadow:0 24px 35px rgba(0,0,0,.4)}
+  .navlinks.is-open{display:flex}
+  .navlinks>a:not(.button){display:block;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.09);font-size:.94rem}
+  .nav-more{width:100%}
+  .nav-more>summary{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.09);font-size:.94rem}
+  .nav-dropdown{position:static;width:100%;max-height:none;margin:4px 0 10px;padding:5px 12px;border:0;box-shadow:none;background:rgba(255,255,255,.035)}
+  .nav-dropdown a{padding:10px 12px;font-size:.9rem!important}
+  .navlinks>.nav-cta{width:100%;margin-top:14px;align-self:stretch}
+}
+@media(max-width:600px){
+  .nav-inner{gap:10px}
+  .nav-toggle{padding:8px 11px;font-size:.82rem}
+  .navlinks{max-height:calc(100vh - 72px);max-height:calc(100dvh - 72px)}
+}
 </style>
 </head>
 <body>
-<header class="nav"><div class="wrap nav-inner"><a class="brand" href="#home" aria-label="Memory Studio home"><div class="mark" aria-hidden="true">◉</div><div><strong>MEMORY STUDIO</strong><span>YOUR LIFE. YOUR STORY.</span></div></a><nav class="navlinks" aria-label="Main navigation"><a href="#story-picks">New: Story Picks</a><a href="#import-memories">Import photos</a><a href="https://clearmyrecord.github.io/matthew-tunstall-website/memory-studio/music/">Music Library</a><a href="#toolkit">Full toolkit</a><a href="#platforms">All platforms</a><a href="#apple-development">Apple coming soon</a><a href="#how">How it works</a><a href="#audiences">Who it's for</a><a href="#pricing">Pricing</a><a href="#whole-library">Entire library</a><a href="#private-tv">Private TV</a><a href="#first-movie">First movie</a><a href="#guides">Guides</a><a href="partners.html">Streaming partners</a><a href="#faq">FAQ</a><a class="button primary" href="#free-trial">Free trial ↗</a></nav></div></header>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#home" aria-label="Memory Studio home"><div class="mark" aria-hidden="true">◉</div><div><strong>MEMORY STUDIO</strong><span>YOUR LIFE. YOUR STORY.</span></div></a>
+    <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation menu"><span class="nav-toggle-icon" aria-hidden="true">☰</span><span>Menu</span></button>
+    <nav class="navlinks" id="site-nav" aria-label="Main navigation">
+      <a href="#how">How it works</a>
+      <a href="#toolkit">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#story-picks">Story Picks</a>
+      <a href="#guides">Guides</a>
+      <details class="nav-more">
+        <summary>Explore <span aria-hidden="true">▾</span></summary>
+        <div class="nav-dropdown">
+          <a href="#import-memories">Import photos</a>
+          <a href="https://clearmyrecord.github.io/matthew-tunstall-website/memory-studio/music/">Music Library</a>
+          <a href="#platforms">All platforms</a>
+          <a href="#apple-development">Apple coming soon</a>
+          <a href="#audiences">Who it's for</a>
+          <a href="#whole-library">Entire library</a>
+          <a href="#private-tv">Private TV</a>
+          <a href="#first-movie">First movie</a>
+          <a href="partners.html">Streaming partners</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </details>
+      <a class="button primary nav-cta" href="#free-trial">Free trial ↗</a>
+    </nav>
+  </div>
+</header>
 <main id="home">
 <section class="hero"><div class="wrap hero-grid"><div><span class="pill">Windows Story Picks beta • Apple &amp; Android in development</span><h1>Your photos. Your videos. Your life story. <span class="gold">One incredible movie.</span></h1><p class="lead">Turn thousands of photos and videos into a documentary about your life. Windows v46 includes local media import, AI-assisted scene selection, chapter planning, storyboard editing, rendering, narration and export workflows that have been tested by the developer. Results vary with media and installed dependencies. You approve what belongs in the story. Start with media already on your computer—no iPhone or iCloud account required.</p><div class="actions"><a class="button primary" href="#free-trial">Request free Windows beta</a><a class="button secondary" href="partners.html">Streaming / TV partnerships</a><a class="button secondary" href="#story-picks">See Story Picks →</a><a class="button secondary" href="#platforms">Explore platform progress →</a></div><div class="assurances"><span><b>◇</b> Your originals stay yours</span><span><b>∞</b> Built for large libraries</span><span><b>♧</b> Privacy-first design</span></div></div><div class="device" role="img" aria-label="Illustrative Memory Studio interface showing a chronological photo, notes, and voice recordings"><div class="screen"><aside class="sidebar"><div class="mini-brand">MEMORY<br>STUDIO</div><div class="active">▣ Timeline</div><div>♙ People</div><div>⌖ Places</div><div>▤ Stories</div><div>♩ Voice</div><div>⌕ Search</div><div>♻ Studio Trash</div></aside><div class="workspace"><div class="topline"><span>September 2011 · My Life</span><span>◂ &nbsp; ▸</span></div><div class="photo"></div><div class="thumbs"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div><div class="note"><strong>What was happening?</strong>“This was a turning point. I had no idea what was next, but I knew my story was just beginning.”<br><br><span style="color:#f0c780">● Record your story</span></div></div></div></div></div></section>
 <section class="section" id="pricing"><div class="wrap"><div class="section-heading"><div class="eyebrow">Planned launch editions</div><h2>A lifetime of memories deserves a home.</h2><p>Proposed one-time launch pricing for Memory Studio. These are not current purchase offers. Final features, platform availability, and pricing will be confirmed before sales open.</p></div><p class="small"><strong>Windows v46 status:</strong> The development beta passed targeted Windows workflow checks for media import and film editing, including media import, scene selection, chapters, rendering, narration and export. These are initial beta checks, not independent certification or a guarantee for every computer. Optional AI models, FFmpeg and other local dependencies may be needed. Paid license enforcement, automatic streaming publication and released mobile apps are not available.</p><div class="pricing">
@@ -234,4 +299,35 @@
 <footer class="footer"><div class="wrap footer-inner"><div><strong>MEMORY STUDIO</strong><p>Every memory has a story.</p></div><p><a href="partners.html">Streaming partners</a> · <a href="partner-one-sheet.html">Partner brief</a> · <a href="#guides">Guides</a> · <a href="mailto:Matt@UnitedPaintersWW.com">Contact</a> · Commercial preview • © <span id="year">2026</span> Memory Studio</p></div></footer>
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 <script>document.getElementById('memory-file-preview').addEventListener('change',function(){var n=this.files.length;document.getElementById('memory-file-status').textContent=n?n.toLocaleString()+' file'+(n===1?'':'s')+' selected on this device. Nothing has been uploaded.':'No files selected.';});</script>
+<script>
+(function(){
+  var toggle=document.querySelector('.nav-toggle');
+  var nav=document.getElementById('site-nav');
+  var more=document.querySelector('.nav-more');
+  if(!toggle||!nav)return;
+  function closeNav(){
+    nav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','Open navigation menu');
+    if(more)more.open=false;
+  }
+  toggle.addEventListener('click',function(){
+    var open=nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded',String(open));
+    toggle.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');
+    if(!open&&more)more.open=false;
+  });
+  nav.addEventListener('click',function(event){if(event.target.closest('a'))closeNav();});
+  document.addEventListener('click',function(event){
+    if(more&&!event.target.closest('.nav-more'))more.open=false;
+    if(!event.target.closest('.nav'))closeNav();
+  });
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape'&&(nav.classList.contains('is-open')||(more&&more.open))){
+      closeNav();toggle.focus();
+    }
+  });
+  window.addEventListener('resize',function(){if(window.innerWidth>1080)closeNav();});
+})();
+</script>
 </body></html>
