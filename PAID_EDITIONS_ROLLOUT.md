@@ -1,6 +1,6 @@
 # Memory Studio — paid edition rollout
 
-**Status (Windows v37):** Architecture staged; not live. The publicly displayed prices are proposed *one-time* launch offers. No customer payments are accepted yet. The v37 Story Picks beta is not divided into licensed paid editions.
+**Status (October 28, 2026):** The private Render service runs a sandbox Stripe payment and signed-license issuer prototype. The public website accepts **no purchases**; public license delivery, desktop activation and installation have not passed acceptance testing. The listed prices are proposed *one-time* launch offers.
 
 | Edition | Proposed price | Planned entitlement |
 |---|---:|---|
@@ -10,19 +10,19 @@
 | Beta (`beta`) | $0 while testing | Limited testing access only, not a paid edition |
 
 ## Architecture
-- **Identity:** Existing Supabase authentication, one user identity across all editions.
-- **Access:** `account/editions_setup.sql` creates a read-only-for-users entitlement record. Only trusted server code may write it after a verified Stripe webhook; never authorize paid features based on browser state or user-editable metadata.
-- **Checkout:** Stripe Checkout in payment mode; three one-time Prices linked to Stripe Products. Server creates checkout sessions for a known authenticated user and fixed Price ID.
-- **Fulfillment:** Signed webhook verifies checkout and payment status, prevents replay/duplicate grants, logs provider event IDs, updates edition ownership, and handles refunds/disputes. Do not grant access just because customer reaches a “success” URL.
-- **API gating:** Every premium document/export/render operation checks a trusted entitlement before processing. UI explains locked functionality but is not the security boundary.
+- **Identity:** Account-free, local-first Windows app. Do not require a Supabase account, cloud login or media upload to use paid desktop editions.
+- **Access:** Private Render backend signs Ed25519 licenses after independently confirming a paid Stripe session; Windows app must verify the license locally and apply edition-wide feature gates. A browser success URL or user-editable field never grants an entitlement.
+- **Checkout:** Stripe sandbox Checkout is deployed privately using three server-configured one-time Price IDs. No account is needed; checkout and license fulfillment require complete secret configuration, signed webhook and acceptance tests. The public website does not launch checkout.
+- **Fulfillment:** Sandbox-only server verifies paid sessions and expected price IDs via Stripe, issues an idempotent signed license into a persistent orders store, and emails activation when SMTP is configured. Refunds/disputes and reliable production fulfillment remain release blockers.
+- **App gating:** Every premium desktop operation must validate a locally verified license before running; controls alone are insufficient. These entitlement checks still require integration and full Windows testing.
 - **AI/cloud consumption:** One-time desktop prices do not imply unlimited ongoing cloud video rendering, AI transcription, or storage. Define explicit fair-use limits or optional usage plans before paid launch; keep basic local use independent.
 - **Family access:** Family Legacy does not automatically include multi-user collaboration; invites, consent and cross-account sharing are a separate later addition requiring authorization review.
 - **Rollout checks:** two-account privacy test; no-payment access rejection; tier-specific request rejection; charge/refund replay testing; quota and billing cost assessment; desktop installer license checks; support and account recovery paths.
 
 ## When / order
-1. **Now:** edition definitions and protected database migration prepared in GitHub. No payments enabled.
-2. **Next, after Stripe is connected:** create test-mode products and Price IDs; implement a secret-backed checkout endpoint and verified webhook. Apply migration in Supabase and test with test-mode purchases.
-3. **Before collecting real money:** implement backend entitlements across the website and the current v37-based Windows engine, establish quotas, test refunds and access denial, configure payment/support pages, then enable live purchases.
+1. **Now:** three sandbox Stripe prices, private FastAPI issuer and Render service are prepared; MemoryStudio.tv uses the correct checkout origin and return address. No live charges or website checkout.
+2. **Next:** configure the remaining Render sandbox secrets and outbound license email, install the issuer's public verification key in Windows, and run paid sandbox checkout→webhook→license→email→offline activation tests.
+3. **Before collecting real money:** finish desktop feature gates, restore/update testing, signed installer, live Stripe pricing, refunds/taxes/support and customer privacy policies. Then explicitly enable production checkout.
 4. **Afterward:** scale cloud rendering and bulk phone imports. Do not advertise those as available in a paid package until actually shipped.
 
-**Security:** Never commit Stripe secret keys or webhook signing secrets to public GitHub Pages. GitHub Pages cannot execute a secure payment webhook. Use Supabase Edge Functions or another trusted server.
+**Security:** Never commit Stripe secrets, webhook secrets or license-signing private keys to public GitHub Pages or the Windows client. Payments and signing run only on the private Render service; the website remains static.
