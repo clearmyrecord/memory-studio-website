@@ -4,7 +4,7 @@ Status: release protocol prepared; desktop updater NOT yet installed or tested. 
 
 ## Architecture
 - Website (GitHub Pages): public release metadata and documentation only; no Stripe secrets or license database.
-- Windows desktop app: on launch and every 24 hours while running, fetch `https://clearmyrecord.github.io/matthew-tunstall-website/memory-studio/releases/stable.json` over HTTPS with a short timeout. Manual **Check for updates** option. Never send photos, videos, projects, device identifiers, or license tokens to the static website.
+- Windows desktop app: on launch and every 24 hours while running, fetch `https://memorystudio.tv/releases/stable.json` over HTTPS with a short timeout. Manual **Check for updates** option. Never send photos, videos, projects, device identifiers, or license tokens to the static website.
 - Manifest `available=false` means no update is offered. When available, require a valid semantic version newer than the installed version, Windows platform compatibility, HTTPS artifact URL from an explicitly allowlisted release host, SHA-256 match and verified Authenticode signature from the pinned publisher. Never execute a manifest-provided command.
 - Download to a temporary file, check sufficient disk space, verify checksum and publisher signature, prompt before installing, close active renders gracefully, and install using the desktop framework's supported signed update mechanism. Retain previous installer for recovery. Do not install unsigned binaries.
 - Store user projects/media in user-selected locations or application data, NEVER inside replaceable installation directories. Back up settings before migrations; keep migrations backward-compatible and test downgrade/restore.
